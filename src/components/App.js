@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import BreadCrumbTitle from './components/BreadCrumbTitle';
-import Centered from './components/Centered';
-
+import BreadCrumbTitle from './BreadCrumbTitle';
+import Centered from './Centered';
+import MainMenu from './MainMenu';
 
 class App extends Component {
   render() {
@@ -9,6 +9,7 @@ class App extends Component {
       <div className="App">
         <Centered>
           <BreadCrumbTitle />
+          <MainMenu />
         </Centered>
       </div>
     );
