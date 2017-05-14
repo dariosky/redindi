@@ -32,12 +32,8 @@ const textStyle = {
 };
 
 class SketchedButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
 
-  handleClick(e) {
+  handleClick = () => {
     console.log('clicked', this.props.text);
   }
 
