@@ -24,7 +24,8 @@ const pathStyle = {
   fill: '#dedada',
   fillRule: 'evenodd',
   mixBlendMode: 'normal', imageRendering: 'auto', isolation: 'auto',
-  // animation:'spin 4s linear infinite'
+  // animation: 'spin 4s linear infinite',
+  transformOrigin: '50% 50%',
 };
 
 const textStyle = {
@@ -44,10 +45,10 @@ class SketchedButton extends React.Component {
   render() {
     return (
       <a className="sketched button"
-        href="#" onClick={this.handleClick}>
+         href="#" onClick={this.handleClick}>
         <svg width="200" height="200"
              viewBox="0 0 354 354"
-             style={{cursor:'pointer'}}
+             style={{cursor: 'pointer', overflow: 'visible'}}
         >
           <g transform="translate(0 -698.03) matrix(.79666 0 0 .79666 964.11 421.04)">
             <path
