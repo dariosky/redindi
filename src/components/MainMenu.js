@@ -45,7 +45,7 @@ class SketchedButton extends React.Component {
   render() {
     return (
       <a className="sketched button"
-         href="#" onClick={this.handleClick}>
+         href="" onClick={this.handleClick}>
         <svg width="200" height="200"
              viewBox="0 0 354 354"
              style={{cursor: 'pointer', overflow: 'visible'}}
