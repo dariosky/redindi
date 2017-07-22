@@ -10,7 +10,9 @@ const style = {
 const BreadCrumbTitle = () => (
   <div style={style}>
     <h1>Dindi</h1>
-    <div>being obsessed about finance flows</div>
+    <div style={{marginBottom: '20px'}}>
+      being obsessed with finance flows
+    </div>
   </div>
 );
 

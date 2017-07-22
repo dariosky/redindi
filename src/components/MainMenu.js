@@ -1,17 +1,19 @@
 import React from 'react';
+import '../styles/sketched.css';
 
-const MainMenu = (props) => (
-  <div style={{
-    backgroundColor: 'rgba(255,255,255, 0.4)',
-    minWidth: '300px',
-    minHeight: '300px'
-  }}>
-    <SketchedButton text="Add"/>
-    <SketchedButton text="Settings"/>
-    <SketchedButton text="Stats"/>
-    {props.children}
-  </div>
-);
+class MainMenu extends React.Component {
+  render() {
+    return <div style={{
+      backgroundColor: 'rgba(255,255,255, 0.4)',
+      minWidth: '300px',
+    }}>
+      <SketchedButton text="Add"/>
+      <SketchedButton text="Settings"/>
+      <SketchedButton text="Stats"/>
+      {this.props.children}
+    </div>
+  }
+}
 
 const pathStyle = {
   colorRendering: 'auto',
@@ -23,7 +25,8 @@ const pathStyle = {
   fillRule: 'evenodd',
   mixBlendMode: 'normal', imageRendering: 'auto', isolation: 'auto',
   // animation:'spin 4s linear infinite'
-}
+};
+
 const textStyle = {
   fontSize: '80px',
   letterSpacing: '0px',
@@ -31,17 +34,20 @@ const textStyle = {
   fontFamily: 'Purisa', fill: '#000',
 };
 
+
 class SketchedButton extends React.Component {
 
   handleClick = () => {
     console.log('clicked', this.props.text);
-  }
+  };
 
   render() {
     return (
-      <a href="#" onClick={this.handleClick}>
+      <a className="sketched button"
+        href="#" onClick={this.handleClick}>
         <svg width="200" height="200"
              viewBox="0 0 354 354"
+             style={{cursor:'pointer'}}
         >
           <g transform="translate(0 -698.03) matrix(.79666 0 0 .79666 964.11 421.04)">
             <path

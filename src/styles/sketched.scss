@@ -1,0 +1,12 @@
+a.sketched.button {
+
+  text tspan {
+    transition: all 200ms ease;
+    fill: black
+  }
+  &:hover {
+    text tspan {
+      fill: white
+    }
+  }
+}
