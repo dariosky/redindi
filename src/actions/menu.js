@@ -1,5 +1,5 @@
 function gotoHome() {
   return {
-    type: GOTO_HOME
+    type: GOTO_HOME,
   }
 }

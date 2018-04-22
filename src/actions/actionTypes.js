@@ -1,1 +1,1 @@
-const ADD_TODO = 'add_todo';
+const ADD_TODO = 'add_todo'

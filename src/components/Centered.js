@@ -1,16 +1,21 @@
-import React from 'react';
-const centerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minHeight: '100%'
-};
+import React from 'react'
+import injectSheet from 'react-jss'
 
-const Centered = (props) => (
-  <div style={centerStyle}>
+const styles = {
+  centered: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '100%',
+  },
+}
+
+const Centered = (props) => {
+  const {classes} = props
+  return <div className={classes.centered}>
     {props.children}
   </div>
-);
+}
 
-export default Centered;
+export default injectSheet(styles)(Centered)

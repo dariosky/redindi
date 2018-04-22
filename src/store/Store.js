@@ -1,9 +1,9 @@
-import reducer from '../reducers';
-import {createStore} from 'redux';
+import reducer from '../reducers'
+import {createStore} from 'redux'
 
 const store = createStore(
   reducer, /* preloadedState, */
-  // typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+)
 
-export default store;
+export default store
