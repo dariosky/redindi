@@ -1,39 +1,16 @@
-const todo = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false,
-      }
-    case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
-        return state
-      }
+import * as actionTypes from '../actions/actionTypes'
+import {BrowserRouter} from 'react-router-dom'
 
-      return {
-        ...state,
-        completed: !state.completed,
+const menus = (state = [], action) => {
+  switch (action.type) {
+    case actionTypes.GOTO_URL:
+      console.log('GotoURL:', action)
+      return dispatch => {
+        BrowserRouter.push(action.url)
       }
     default:
       return state
   }
 }
 
-const todos = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        todo(undefined, action),
-      ]
-    case 'TOGGLE_TODO':
-      return state.map(t =>
-        todo(t, action),
-      )
-    default:
-      return state
-  }
-}
-
-export default todos
+export default menus

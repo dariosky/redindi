@@ -1,1 +1,2 @@
-const ADD_TODO = 'add_todo'
+export const
+  GOTO_URL = 'goto_url'

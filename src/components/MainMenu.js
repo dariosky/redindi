@@ -3,15 +3,24 @@ import '../styles/sketched.css'
 import {Link} from 'react-router-dom'
 import injectSheet from 'react-jss'
 import classNames from 'classnames'
+import {gotoUrl} from '../actions/menu'
+import {connect} from 'react-redux'
 
 const styles = {
   mainMenu: {
     minWidth: '300px',
   },
   link: {
+    verticalAlign: 'middle',
     display: 'inline-block',
-    '&:hover .path': {
-      fill: '#fff',
+    '&:hover': {
+      transform: 'scale(1.05)',
+      '& $path': {fill: '#fff'},
+    },
+    '&:focus $path': {
+      zoom: '1.2',
+      outline: 'none',
+      stroke: '#a09898',
     },
   },
   btn: {
@@ -46,8 +55,8 @@ class MainMenu extends React.Component {
     const {classes} = this.props
     return <div className={classes.mainMenu}>
       <SketchedButton text="Add" path="/add"/>
-      <SketchedButton text="Settings"/>
-      <SketchedButton text="Stats"/>
+      <SketchedButton text="Settings" path="/settings"/>
+      <SketchedButton text="Stats" path="/stats"/>
       {this.props.children}
     </div>
   }
@@ -57,6 +66,8 @@ class SketchedButton extends React.Component {
 
   handleClick = () => {
     console.log('clicked', this.props.text)
+    this.props.gotoUrl(this.props.path)
+
   }
 
   render() {
@@ -74,14 +85,25 @@ class SketchedButton extends React.Component {
         </text>
       </g>
     </svg>
-    const Component = path ? Link : 'div'
+    // const Component = path ? Link : 'div'
+    const Component = 'div'
     return React.createElement(
-      Component, {className: classes.link, to: path, onClick: this.handleClick}, ui,
+      Component, {
+        className: classes.link, to: path,
+        onClick: this.handleClick,
+      }, ui,
     )
   }
 }
 
-SketchedButton = injectSheet(styles)(SketchedButton)
+const mapDispatchToProps = {
+  gotoUrl,
+}
+
+SketchedButton = injectSheet(styles)(
+  connect(null, mapDispatchToProps)(SketchedButton),
+)
+
 
 export default injectSheet(styles)(MainMenu)
 
