@@ -1,11 +1,22 @@
-import reducer from '../reducers'
-import {applyMiddleware, createStore} from 'redux'
+import reducers from '../reducers'
+import {applyMiddleware, combineReducers, createStore} from 'redux'
 import reduxThunk from 'redux-thunk'
+import createHistory from 'history/createBrowserHistory'
+import {routerMiddleware, routerReducer} from 'react-router-redux'
+
+export const history = createHistory()
 
 const store = createStore(
-  reducer, /* preloadedState, */
+  combineReducers(
+    {
+      dindi: reducers,
+      router: routerReducer,
+    },
+  ),
   typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(reduxThunk),
+  applyMiddleware(
+    reduxThunk,
+    routerMiddleware(history)),
 )
 
 export default store

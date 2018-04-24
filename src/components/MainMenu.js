@@ -1,6 +1,5 @@
 import React from 'react'
 import '../styles/sketched.css'
-import {Link} from 'react-router-dom'
 import injectSheet from 'react-jss'
 import classNames from 'classnames'
 import {gotoUrl} from '../actions/menu'
@@ -65,7 +64,6 @@ class MainMenu extends React.Component {
 class SketchedButton extends React.Component {
 
   handleClick = () => {
-    console.log('clicked', this.props.text)
     this.props.gotoUrl(this.props.path)
 
   }

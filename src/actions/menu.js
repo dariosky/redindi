@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes'
+import {push} from 'react-router-redux'
 
 export function gotoHome() {
   return {
@@ -8,9 +9,7 @@ export function gotoHome() {
 }
 
 export function gotoUrl(url) {
-  console.log('Creationg action GOTO_URL', url)
-  return {
-    type: actionTypes.GOTO_URL,
-    url: url,
+  return dispatch => {
+    dispatch(push(url))
   }
 }
