@@ -3,10 +3,13 @@ import injectSheet from 'react-jss'
 
 const styles = {
   centered: {
+    boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    textAlign: 'center',
+    padding: '2em',
     minHeight: '100%',
   },
 }
