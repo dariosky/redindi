@@ -21,3 +21,6 @@ yarn-error.log*
 /src/**/*.css
 
 .cache
+
+/api/uploads
+/api/dindi.sqlite
