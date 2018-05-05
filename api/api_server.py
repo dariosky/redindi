@@ -22,12 +22,12 @@ def get_app(production=True):
     setproctitle('api webserver [DINDI]')
     app = Flask(__name__,
                 # static_url_path="",
-                static_folder='ui/build',
-                template_folder='ui/build')
+                static_folder='build',
+                template_folder='build')
     CORS(app)
 
     app.debug = not production
-    db_session = initdb()
+    db = initdb(app)
 
     UPLOAD_FOLDER = 'uploads'
 
@@ -68,10 +68,6 @@ def get_app(production=True):
                 file=filename
             )
         )
-
-    @app.teardown_appcontext
-    def shutdown_session(exception=None):
-        db_session.close()
 
     return app
 

@@ -1,15 +1,28 @@
 import logging
 
-from sqlalchemy import create_engine, Column, String
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from sqlalchemy import Column, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
 logger = logging.getLogger(__name__)
 
-Base = declarative_base()
+
+class ModelBase(object):
+    """Baseclass for custom user models."""
+
+    #: the query class used. The `query` attribute is an instance
+    #: of this class. By default a `BaseQuery` is used.
+    query_class = BaseQuery
+
+    #: an instance of `query_class`. Can be used to query the
+    #: database for instances of this model.
+    query = None
 
 
-class User(Base):
+Model = declarative_base(cls=ModelBase)
+
+
+class User(Model):
     __tablename__ = 'users'
 
     id = Column(String, primary_key=True)
@@ -17,13 +30,12 @@ class User(Base):
     password = Column(String, nullable=False)
 
 
-def initdb():
+def initdb(app):
     db_filename = 'dindi.sqlite'
-    engine = create_engine(f"sqlite:///{db_filename}",
-                           # echo=True  # show the queries
-                           )
-    Base.metadata.create_all(engine)
-    # noinspection PyPep8Naming
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    return session
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_filename}"
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db = SQLAlchemy(app, model_class=Model)
+    db.create_all()
+
+    return db
