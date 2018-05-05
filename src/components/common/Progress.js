@@ -4,7 +4,6 @@ import injectSheet from 'react-jss'
 
 const styles = {
   progress: `
-    transition: all .5s ease;
     overflow: hidden;
     position: relative;
     display:flex;
@@ -17,17 +16,18 @@ const styles = {
     top: 0;
     bottom: 0;
     left: 0;
+    background-attachment: fixed;
     background: repeating-linear-gradient(
       -55deg,
-      #777,
-      #aaa 10px,
-      #000 10px,
-      #000 20px
+      #aaa,
+      #bbb 10px,
+      #bbb 10px,
+      #aaa 20px
     );
   `,
   text: `
     position: absolute;
-    color: white;
+    color: black;
     font-weight: bolder;
   `
 }
