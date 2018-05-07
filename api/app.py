@@ -8,7 +8,9 @@ from flask_cors import CORS
 from jinja2 import Environment, PackageLoader, select_autoescape
 from werkzeug.utils import secure_filename
 
-from api.db import initdb
+from db import initdb
+from flasky import private_config_get_or_create
+from security import init_security
 
 logger = logging.getLogger('dindi.api.server')
 
@@ -22,12 +24,17 @@ def get_app(production=True):
     setproctitle('api webserver [DINDI]')
     app = Flask(__name__,
                 # static_url_path="",
-                static_folder='build',
-                template_folder='build')
+                # static_folder='build',
+                # template_folder='build'
+                )
     CORS(app)
 
     app.debug = not production
+
+    private_config_get_or_create(app)
     db = initdb(app)
+    init_security(app, db)
+    db.create_all()
 
     UPLOAD_FOLDER = 'uploads'
 
@@ -74,6 +81,7 @@ def get_app(production=True):
 
 def run_api(host='127.0.0.1', port=3001, production=True):
     app = get_app(production)
+    app.config['DEBUG'] = not production
     if production:
         print(f"Running production server as "
               f"{'bjoern' if bjoern else 'Flask'}"
@@ -85,7 +93,9 @@ def run_api(host='127.0.0.1', port=3001, production=True):
             bjoern.run(app, host, port)
         else:
             print("Using Flask threaded")
-            app.run(host=host, port=port, threaded=True, debug=False, use_reloader=False)
+            app.run(host=host, port=port,
+                    use_reloader=not production,
+                    )
     else:
         print("Running in Flask debug mode")
         app.run(host=host, port=port)
@@ -93,3 +103,5 @@ def run_api(host='127.0.0.1', port=3001, production=True):
 
 if __name__ == '__main__':
     run_api(production=False)
+else:
+    app = get_app(production=True)

@@ -1,7 +1,6 @@
 import logging
 
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
-from sqlalchemy import Column, String
 from sqlalchemy.ext.declarative import declarative_base
 
 logger = logging.getLogger(__name__)
@@ -22,20 +21,11 @@ class ModelBase(object):
 Model = declarative_base(cls=ModelBase)
 
 
-class User(Model):
-    __tablename__ = 'users'
-
-    id = Column(String, primary_key=True)
-    name = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-
-
 def initdb(app):
     db_filename = 'dindi.sqlite'
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_filename}"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db = SQLAlchemy(app, model_class=Model)
-    db.create_all()
 
     return db

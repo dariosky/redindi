@@ -24,3 +24,5 @@ yarn-error.log*
 
 /api/uploads
 /api/dindi.sqlite
+
+.app_secrets.json
