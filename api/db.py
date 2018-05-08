@@ -1,5 +1,6 @@
 import logging
 
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -27,5 +28,6 @@ def initdb(app):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db = SQLAlchemy(app, model_class=Model)
+    migrate = Migrate(app, db)
 
     return db
