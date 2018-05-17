@@ -1,5 +1,8 @@
+setproctitle
+
 flask
 
 flask_sqlalchemy
 flask-security
 flask-migrate
+flask-jwt-extended

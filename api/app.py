@@ -8,6 +8,7 @@ from flask_cors import CORS
 from jinja2 import Environment, PackageLoader, select_autoescape
 from werkzeug.utils import secure_filename
 
+from api import init_api
 from db import initdb
 from flasky import private_config_get_or_create
 from security import init_security
@@ -32,9 +33,10 @@ def get_app(production=True):
     app.debug = not production
 
     private_config_get_or_create(app)
-    db = initdb(app)
-    init_security(app, db)
-    db.create_all()
+    app.db = initdb(app)
+    init_security(app)
+    init_api(app)
+    app.db.create_all()
 
     UPLOAD_FOLDER = 'uploads'
 
