@@ -7,6 +7,7 @@ import {routerMiddleware, routerReducer} from 'react-router-redux'
 export const history = createHistory()
 
 const store = createStore(
+  // TODO: combine without creating nest
   combineReducers(
     {
       dindi: reducers,

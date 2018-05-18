@@ -6,6 +6,7 @@ import {Route, Switch} from 'react-router-dom'
 import Add from './Add'
 import Settings from './Settings'
 import Stats from './Stats'
+import LoginForm from './LoginForm'
 
 class App extends Component {
   render() {
@@ -14,12 +15,14 @@ class App extends Component {
         <Centered>
           <BreadCrumbTitle/>
           <Centered>
-            <Switch>
-              <Route exact path="/"><MainMenu/></Route>
-              <Route path="/add"><Add/></Route>
-              <Route path="/settings"><Settings/></Route>
-              <Route path="/stats"><Stats/></Route>
-            </Switch>
+            <LoginForm> {/*do the login form if not logged */}
+              <Switch>
+                <Route exact path="/"><MainMenu/></Route>
+                <Route path="/add"><Add/></Route>
+                <Route path="/settings"><Settings/></Route>
+                <Route path="/stats"><Stats/></Route>
+              </Switch>
+            </LoginForm>
           </Centered>
         </Centered>
       </div>

@@ -5,9 +5,12 @@ import {Link} from 'react-router-dom'
 
 const styles = {
   breadcrumb: {
-    // background: 'darkorange',
+    background: 'darkorange',
+    padding: '2em',
+    width: '100%',
     color: 'black',
     textAlign: 'center',
+    transition: 'background-color 0.8s ease',
   },
   subtitle: {marginBottom: '20px'},
 

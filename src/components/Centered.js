@@ -9,7 +9,6 @@ const styles = {
     alignItems: 'center',
     // justifyContent: 'center',
     textAlign: 'center',
-    padding: '2em',
     minHeight: '100%',
   },
 }
