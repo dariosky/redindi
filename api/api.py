@@ -60,6 +60,16 @@ def register():
     return jsonify(dict(msg="User created")), 200
 
 
+@api_blueprint.route('/check', methods=['GET'])
+def check():
+    """ Given a token return the current user details """
+    user = jwt_current_user()
+    if user:
+        return jsonify(user), 200
+    else:
+        return jsonify(dict(msg="Unauthenticated")), 401
+
+
 @api_blueprint.route('/protected', methods=['GET'])
 @jwt_required
 def protected():

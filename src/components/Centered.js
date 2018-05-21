@@ -14,8 +14,10 @@ const styles = {
 }
 
 const Centered = (props) => {
-  const {classes} = props
-  return <div className={classes.centered}>
+  const {classes, padding} = props
+  const style = {padding}
+  return <div className={classes.centered}
+              style={style}>
     {props.children}
   </div>
 }

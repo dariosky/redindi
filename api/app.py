@@ -20,13 +20,17 @@ try:
 except ImportError:
     bjoern = None
 
+DIST_FOLDER = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..', 'build')
+)
+
 
 def get_app(production=True):
     setproctitle('api webserver [DINDI]')
     app = Flask(__name__,
-                # static_url_path="",
-                # static_folder='build',
-                # template_folder='build'
+                static_url_path="",
+                static_folder='build',
+                template_folder='build'
                 )
     CORS(app)
 
@@ -40,26 +44,34 @@ def get_app(production=True):
 
     UPLOAD_FOLDER = 'uploads'
 
-    @app.route("/404/")
-    def not_found():
-        jinja_env = Environment(
-            loader=PackageLoader('templates'),
-            autoescape=select_autoescape(['html', 'xml'])
-        )
+    @app.errorhandler(404)
+    def catch_all(e):
+        url = flask.request.path
+        if url == "/404/":
+            jinja_env = Environment(
+                loader=PackageLoader('templates'),
+                autoescape=select_autoescape(['html', 'xml'])
+            )
 
-        template = jinja_env.get_template('404.html')
-        return template.render(), 404
-
-    @app.route("/", defaults={"url": ""})
-    @app.route('/<path:url>')
-    def catch_all(url):
-        """ Handle the page-not-found - apply some backward-compatibility redirect """
-        # if url.startswith('home'):
-        #     return flask.redirect('something with home')
-        ext = os.path.splitext(url)[-1]
-        if ext in {'.jpg', '.ico', '.png', '.map', '.js', '.svg', '.json', '.css'}:
-            return flask.send_from_directory('dist', url)
-        return flask.render_template("index.html")
+            template = jinja_env.get_template('404.html')
+            return template.render(), 404
+        else:
+            # Catch-all
+            ext = os.path.splitext(url)[-1]
+            if ext in {'.jpg', '.ico', '.png', '.svg',
+                       '.map', '.js', '.json', '.css'}:
+                pass  # serve static from folder
+            else:
+                url = 'index.html'  # serve the SPA
+            if url.startswith('/'):
+                url = url[1:]
+            if os.path.isfile(
+                os.path.join(DIST_FOLDER, url)
+            ):
+                return flask.send_from_directory(DIST_FOLDER, url)
+            else:
+                logger.error("Missing file", url)
+                return "File not found :( " + url
 
     @app.route("/upload/mini$/", methods=['POST'])
     def upload_mini():

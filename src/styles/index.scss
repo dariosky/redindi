@@ -5,6 +5,10 @@
   url('/public/fonts/Purisa.ttf') format('truetype');
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   background: silver;
   margin: 0;

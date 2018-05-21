@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/sketched.css'
 import injectSheet from 'react-jss'
 import classNames from 'classnames'
-import {gotoUrl} from '../actions/menu'
+import {gotoUrl} from '../reducers/dindi'
 import {connect} from 'react-redux'
 
 const styles = {

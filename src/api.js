@@ -1,10 +1,11 @@
-
+import axios from 'axios'
+import API from './config'
 
 export function authCheckStatus(token) {
-  if (!token) return false // no token, we're not logged
+  if (!token) return Promise.resolve({
+    user: false,
+  }) // no token, we're not logged
 
-  axios.get(`${API.API_BASE}/api/check`, {token})
-    .then(response => response.data)
-    .then(dataset => dispatch(authSetState(dataset)))
+  return axios.get(`${API.API_BASE}/api/check`, {token})
     .catch(err => console.log(err))
 }

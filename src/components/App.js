@@ -7,6 +7,7 @@ import Add from './Add'
 import Settings from './Settings'
 import Stats from './Stats'
 import LoginForm from './LoginForm'
+import UnAuthenticated from './UnAuthenticated'
 
 class App extends Component {
   render() {
@@ -14,8 +15,9 @@ class App extends Component {
       <div className="App">
         <Centered>
           <BreadCrumbTitle/>
-          <Centered>
-            <LoginForm> {/*do the login form if not logged */}
+          <Centered padding="20px">
+            {/*do the login form if not logged */}
+            <LoginForm UnAuthenticated={UnAuthenticated}>
               <Switch>
                 <Route exact path="/"><MainMenu/></Route>
                 <Route path="/add"><Add/></Route>
