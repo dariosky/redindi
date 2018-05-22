@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import injectStyles from 'react-jss';
-import * as authActions from '../reducers/auth/authActions'
+import * as authActions from '../../reducers/auth/authActions'
 import {bindActionCreators} from 'redux'
 import Loader from 'react-loader'
 
 const styles = {};
 
-class LoginForm extends React.Component {
+class AuthChecker extends React.Component {
 
   componentDidMount() {
     this.props.actions.authCheck()
@@ -37,7 +37,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-const styledLoginForm = injectStyles(styles)(LoginForm);
+const styledLoginForm = injectStyles(styles)(AuthChecker);
 
 export default connect(
   mapStateToProps,

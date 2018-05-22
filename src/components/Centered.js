@@ -10,6 +10,7 @@ const styles = {
     // justifyContent: 'center',
     textAlign: 'center',
     minHeight: '100%',
+    width: '100%',
   },
 }
 

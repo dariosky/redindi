@@ -6,30 +6,43 @@ import {Route, Switch} from 'react-router-dom'
 import Add from './Add'
 import Settings from './Settings'
 import Stats from './Stats'
-import LoginForm from './LoginForm'
+import AuthChecker from './auth/AuthChecker'
 import UnAuthenticated from './UnAuthenticated'
+import injectStyles from 'react-jss'
+
+const styles = {
+  content: `
+    padding:20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  `,
+
+};
 
 class App extends Component {
   render() {
+    const {classes} = this.props
     return (
       <div className="App">
         <Centered>
           <BreadCrumbTitle/>
-          <Centered padding="20px">
+          <div className={classes.content}>
             {/*do the login form if not logged */}
-            <LoginForm UnAuthenticated={UnAuthenticated}>
+            <AuthChecker UnAuthenticated={UnAuthenticated}>
               <Switch>
                 <Route exact path="/"><MainMenu/></Route>
                 <Route path="/add"><Add/></Route>
                 <Route path="/settings"><Settings/></Route>
                 <Route path="/stats"><Stats/></Route>
               </Switch>
-            </LoginForm>
-          </Centered>
+            </AuthChecker>
+          </div>
         </Centered>
       </div>
     )
   }
 }
 
-export default App
+const styledApp = injectStyles(styles)(App);
+export default styledApp
