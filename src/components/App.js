@@ -9,6 +9,7 @@ import Stats from './Stats'
 import AuthChecker from './auth/AuthChecker'
 import UnAuthenticated from './UnAuthenticated'
 import injectStyles from 'react-jss'
+import {hot} from 'react-hot-loader'
 
 const styles = {
   content: `
@@ -45,4 +46,4 @@ class App extends Component {
 }
 
 const styledApp = injectStyles(styles)(App);
-export default styledApp
+export default hot(module)(styledApp)
