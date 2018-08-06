@@ -9,29 +9,47 @@ import {Form, Input} from 'semantic-ui-react'
 const styles = {};
 
 class LoginForm extends React.Component {
-  componentDidMount() {
-    this.componentWillReceiveProps(this.props);
+  state = {
+    username: '',
+    password: '',
   }
 
-  componentWillReceiveProps(newProps) {
 
+  submit = () => {
+    const {username, password} = this.state
+    console.log('Form valid, login')
+    this.props.actions.login(username, password)
+  }
+
+  handleChange = (e, {name, value}) => {
+    this.setState({[name]: value})
   }
 
   render() {
+    const {username, password} = this.state
     return (
       <div>
-        <p>So you have a Dindi account, great!</p>
+        <p>So you have a Dindi account, excellent!</p>
         <p>Insert your credential to access your data:</p>
-        <Form>
+        <Form onSubmit={this.submit}>
           <Form.Field id='form-input-control-first-name'
                       control={Input} label='User'
-                      placeholder='Your email'/>
+                      required
+                      name='username'
+                      value={username}
+                      onChange={this.handleChange}
+                      placeholder='Your username'/>
           <Form.Field id='form-input-control-last-name'
                       control={Input}
                       type="password"
+                      required
+                      name='password'
+                      value={password}
+                      onChange={this.handleChange}
                       autoComplete="password"
                       label='Password'
                       placeholder='Password'/>
+          <Form.Button content='Login'/>
         </Form>
       </div>
     );

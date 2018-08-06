@@ -9,13 +9,19 @@ export const
 
 export function authCheck(token) {
   if (!token) {
-    token = localStorage.getItem('auth-token')
+    token = localStorage.getItem('access_token')
   }
   return dispatch => {
     api.authCheckStatus(token)
       .then(
-        status => dispatch(authSet(status)),
+        response => dispatch(authSet(response.data))
       )
+      .catch(err => {
+        dispatch(authSet({
+          user: false,
+          error: err.response.data.msg || '',
+        }))
+      })
   }
 }
 
@@ -23,8 +29,15 @@ export function register(username, password) {
   return dispatch => {
     api.register(username, password)
       .then(
-        status => dispatch(registerSet(status)),
+        response => dispatch(registerSet(response.data))
       )
+      .catch(error => {
+        if (error.response && error.response.data)
+          dispatch(registerSet(
+            error.response.data
+          ))
+        else alert(error.message)
+      })
   }
 }
 
@@ -32,15 +45,44 @@ export function authSet(status) {
   console.log('Got auth status', status)
   return {
     type: AUTH_SET,
-    ...status,
+    ...status
   }
 }
 
+export function saveLogin(user) {
+  // log in
+  console.log('Save login in store an app-mem')
+  return dispatch => {
+    localStorage.setItem('access_token', user.access_token);
+    dispatch(authSet({user}))
+  }
+}
 
 export function registerSet(status) {
   console.log('Got register response', status)
+  if (status.user) {
+    return dispatch => dispatch(saveLogin(status.user))
+  }
   return {
     type: REGISTER_SET,
-    ...status,
+    ...status
+  }
+}
+
+export function login(username, password) {
+  return dispatch => {
+    api.login(username, password)
+      .then(
+        response => {
+          dispatch(saveLogin(response.data.user))
+        }
+      )
+      .catch(error => {
+        if (error.response && error.response.data)
+          dispatch(authSet(
+            error.response.data
+          ))
+        else alert(error.message)
+      })
   }
 }

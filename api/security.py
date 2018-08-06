@@ -36,7 +36,7 @@ class Role(ModelBase, RoleMixin):
 
 class User(ModelBase, UserMixin):
     __tablename__ = 'user'
-    email = Column(String(255), unique=True)
+    username = Column(String(255), unique=True)
     password = Column(String(255), nullable=False)
 
     active = Column(Boolean())
@@ -55,7 +55,7 @@ class User(ModelBase, UserMixin):
     login_count = Column(Integer)
 
     def __repr__(self):
-        return '<User %r>' % self.email
+        return '<User %r>' % self.username
 
 
 def init_security(app):

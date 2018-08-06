@@ -19,7 +19,7 @@ class AuthChecker extends React.Component {
     if (auth.user === null) return <Loader/>
     if (auth.user === false) return <UnAuthenticated/>
     return <div>
-      You're logged {auth.user}
+      You're logged in as {auth.user.username}
     </div>;
   }
 }

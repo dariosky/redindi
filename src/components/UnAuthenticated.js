@@ -11,9 +11,9 @@ class UnAuthenticated extends React.Component {
   render() {
     const panes = [
       {menuItem: 'Login', render: () => <Tab.Pane><LoginForm/></Tab.Pane>},
-      {menuItem: 'Signup', render: () => <Tab.Pane><RegisterForm/></Tab.Pane>},
+      {menuItem: 'Signup', render: () => <Tab.Pane><RegisterForm/></Tab.Pane>}
     ]
-    return <Tab panes={panes}/>
+    return <Tab panes={panes} defaultActiveIndex={0}/>
   }
 }
 
@@ -23,7 +23,7 @@ UnAuthenticated.propTypes = {};
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: undefined,
+    actions: undefined
   }
 }
 
@@ -31,5 +31,5 @@ const styledUnAuthenticated = injectStyles(styles)(UnAuthenticated);
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(styledUnAuthenticated);

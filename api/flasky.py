@@ -12,6 +12,7 @@ def private_config_get_or_create(app, config_name='.app_secrets.json'):
         private_config = dict(
             SECRET_KEY=secrets.token_hex(64),
             SECURITY_PASSWORD_SALT=secrets.token_hex(64),
+            JWS_SECRET_KEY=secrets.token_hex(64),
         )
         with open(config_name, 'w') as f:
             json.dump(private_config, f)

@@ -6,12 +6,16 @@ export function authCheckStatus(token) {
     user: false,
   }) // no token, we're not logged
 
-  return axios.get(`${API.API_BASE}/api/check`, {token})
-    .catch(err => console.log(err))
+  return axios.get(`${API.API_BASE}/api/check`,
+    {headers: {Authorization: `Bearer ${token}`}})
 }
 
 export function register(username, password) {
   return axios.post(`${API.API_BASE}/api/register`,
-    {email: username, password})
-    .catch(err => console.log(err))
+    {username, password})
+}
+
+export function login(username, password) {
+  return axios.post(`${API.API_BASE}/api/login`,
+    {username, password})
 }
