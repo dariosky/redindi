@@ -13,13 +13,19 @@ class AuthChecker extends React.Component {
     this.props.actions.authCheck()
   }
 
+  handleLogout = () => {
+    const {auth} = this.props
+    this.props.actions.logout(auth.user.access_token)
+  }
+
   render() {
     // const {classes} = this.props
     const {auth, UnAuthenticated} = this.props
     if (auth.user === null) return <Loader/>
     if (auth.user === false) return <UnAuthenticated/>
     return <div>
-      You're logged in as {auth.user.username}
+      You're logged in as {auth.user.username} - <button onClick={this.handleLogout}>Logout</button>
+      {this.props.children}
     </div>;
   }
 }

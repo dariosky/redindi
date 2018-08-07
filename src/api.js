@@ -3,7 +3,9 @@ import API from './config'
 
 export function authCheckStatus(token) {
   if (!token) return Promise.resolve({
-    user: false,
+    data: {
+      user: false,
+    }
   }) // no token, we're not logged
 
   return axios.get(`${API.API_BASE}/api/check`,
@@ -18,4 +20,9 @@ export function register(username, password) {
 export function login(username, password) {
   return axios.post(`${API.API_BASE}/api/login`,
     {username, password})
+}
+
+export function logout(token) {
+  return axios.post(`${API.API_BASE}/api/logout`,
+    {token})
 }

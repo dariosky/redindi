@@ -92,7 +92,8 @@ def check():
             dict(user=serialize_user(user))
         ), 200
     else:
-        return jsonify(dict(msg="Unauthenticated")), 401
+        return jsonify(dict(msg="Unauthenticated",
+                            user=None)), 401
 
 
 @api_blueprint.route('/protected', methods=['GET'])

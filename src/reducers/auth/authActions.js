@@ -3,16 +3,23 @@ import * as api from '../../api'
 /* ACTION TYPES */
 export const
   AUTH_SET = 'auth_set',
-  REGISTER_SET = 'register_set'
+  REGISTER_SET = 'register_set',
+  STORAGE_TOKEN_KEY = 'access_token'
+
 
 /* ACTIONS */
 
+function getSavedToken() {
+  return localStorage.getItem(STORAGE_TOKEN_KEY)
+}
+
+function removeSavedToken() {
+  localStorage.removeItem(STORAGE_TOKEN_KEY)
+}
+
 export function authCheck(token) {
-  if (!token) {
-    token = localStorage.getItem('access_token')
-  }
   return dispatch => {
-    api.authCheckStatus(token)
+    api.authCheckStatus(token || getSavedToken())
       .then(
         response => dispatch(authSet(response.data))
       )
@@ -84,5 +91,12 @@ export function login(username, password) {
           ))
         else alert(error.message)
       })
+  }
+}
+
+export function logout(token) {
+  return dispatch => {
+    removeSavedToken()
+    return dispatch(authSet({user: false}))
   }
 }
