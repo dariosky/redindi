@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import injectStyles from 'react-jss';
 import * as authActions from '../../reducers/auth/authActions'
 import {Form, Input, Message} from 'semantic-ui-react'
-import _ from 'lodash'
+import isEmpty from 'lodash/isEmpty';
 import {filterObject} from '../../utils/filterObject'
 
 const styles = {};
@@ -53,7 +53,7 @@ class RegisterForm extends React.Component {
       (name, errors) => (errors.filter(item => item !== false)).length)
     console.info(errors)
     this.setState({errors})
-    return _.isEmpty(errors)
+    return isEmpty(errors)
   }
 
   handleChange = (e, {name, value}) => {
