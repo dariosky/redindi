@@ -5,7 +5,20 @@ import * as authActions from '../../reducers/auth/authActions'
 import {bindActionCreators} from 'redux'
 import Loader from 'react-loader'
 
-const styles = {};
+const styles = {
+  logout: {
+    border: 0,
+    background: 'inherit',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+  },
+  authContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+  },
+  footer: {}
+};
 
 class AuthChecker extends React.Component {
 
@@ -20,12 +33,18 @@ class AuthChecker extends React.Component {
 
   render() {
     // const {classes} = this.props
-    const {auth, UnAuthenticated} = this.props
+    const {auth, UnAuthenticated, classes} = this.props
     if (auth.user === null) return <Loader/>
     if (auth.user === false) return <UnAuthenticated/>
-    return <div>
-      You're logged in as {auth.user.username} - <button onClick={this.handleLogout}>Logout</button>
+    return <div className={classes.authContent}>
       {this.props.children}
+      <div className={classes.footer}>
+        You're logged in as {auth.user.username} -
+        <button className={classes.logout}
+                onClick={this.handleLogout}>
+          Logout
+        </button>
+      </div>
     </div>;
   }
 }

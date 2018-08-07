@@ -17,15 +17,28 @@ const styles = {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   `,
 
+  app: `
+    height: 100%;
+  `,
+
+  '@font-face': `
+    font-family: 'Purisa';
+    src: url('/public/fonts/Purisa.eof'); /* For IE */
+    src: local('Purisa'),
+      url('/public/fonts/Purisa.ttf') format('truetype');
+  `
 };
 
 class App extends Component {
   render() {
     const {classes} = this.props
     return (
-      <div className="App">
+      <div className={classes.app}>
         <Centered>
           <BreadCrumbTitle/>
           <div className={classes.content}>

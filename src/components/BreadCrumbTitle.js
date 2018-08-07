@@ -11,6 +11,8 @@ const styles = {
     color: 'black',
     textAlign: 'center',
     transition: 'background-color 0.8s ease',
+    fontFamily: 'Purisa',
+    lineHeight: 'normal !important',
   },
   subtitle: {marginBottom: '20px'},
 
