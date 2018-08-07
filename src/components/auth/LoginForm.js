@@ -4,7 +4,8 @@ import {bindActionCreators} from 'redux';
 import injectStyles from 'react-jss';
 import PropTypes from 'prop-types';
 import * as authActions from '../../reducers/auth/authActions'
-import {Form, Input} from 'semantic-ui-react'
+import Form from 'semantic-ui-react/dist/commonjs/collections/Form'
+import Input from 'semantic-ui-react/dist/commonjs/elements/Input/Input'
 
 const styles = {};
 

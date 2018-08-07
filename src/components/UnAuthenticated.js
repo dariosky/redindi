@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import injectStyles from 'react-jss';
-import {Tab} from 'semantic-ui-react'
+import Tab from 'semantic-ui-react/dist/commonjs/modules/Tab'
 import LoginForm from './auth/LoginForm'
 import RegisterForm from './auth/RegisterForm'
 

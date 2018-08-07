@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import injectStyles from 'react-jss';
 import * as authActions from '../../reducers/auth/authActions'
-import {Form, Input, Message} from 'semantic-ui-react'
+import Form from 'semantic-ui-react/dist/commonjs/collections/Form'
+import Input from 'semantic-ui-react/dist/commonjs/elements/Input/Input'
+import Message from 'semantic-ui-react/dist/commonjs/collections/Message'
 import isEmpty from 'lodash/isEmpty';
 import {filterObject} from '../../utils/filterObject'
 
